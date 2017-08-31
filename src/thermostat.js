@@ -1,7 +1,7 @@
 STARTING_TEMP = 20
 MIN_TEMP = 10
 
-ERROR_MIN_TEMP = "10 is the lowest!"
+ERROR_MIN_TEMP = MIN_TEMP + " is the lowest!"
 
 var Thermostat = function(){
   this.temp = STARTING_TEMP
