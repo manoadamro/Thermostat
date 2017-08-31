@@ -55,4 +55,23 @@ describe('Themostat', function(){
       }).toThrow("10 is the lowest!");
     })
   });
+
+
+  describe('#Power saving mode', function(){
+
+    it('should start in power saving mode',function(){
+      expect(thermostat.powerSaving).toBe(true);
+    })
+
+    it('when power saving is on, max temp is 25', function(){
+      expect(thermostat.maxTemp()).toEqual(25)
+    })
+
+    it('when power saving is off, max temp is 32', function(){
+        thermostat.setPowerSaving(false);
+      expect(thermostat.maxTemp()).toEqual(32)
+    })
+
+  })
+
 });
