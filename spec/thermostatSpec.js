@@ -107,4 +107,32 @@ describe('Themostat', function(){
     })
 
   });
+
+  describe('#resetting the thermostat', function(){
+
+    it('should reset the thermostat to the default temp', function(){
+      thermostat.reset();
+      expect(thermostat.temp).toEqual(STARTING_TEMP)
+    })
+  })
+
+  describe('#current energy usage', function(){
+
+    it('should state low_usage', function(){
+      thermostat.setTemp(17);
+      expect(thermostat.energyUsage).toEqual('low-usage')
+    })
+
+    it('should state medium-usage', function(){
+      thermostat.setTemp(24);
+      expect(thermostat.energyUsage).toEqual('medium-usage')
+    })
+
+    it('should state high-usage', function(){
+      thermostat.setTemp(26);
+      expect(thermostat.energyUsage).toEqual('high-usage')
+    })
+
+  })
+
 });

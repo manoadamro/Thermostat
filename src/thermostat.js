@@ -54,3 +54,7 @@ Thermostat.prototype.maxTemp = function(){
     return 32
   }
 };
+
+Thermostat.prototype.reset = function () {
+  this.temp = STARTING_TEMP
+};
