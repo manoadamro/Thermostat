@@ -120,17 +120,18 @@ describe('Themostat', function(){
 
     it('should state low_usage', function(){
       thermostat.setTemp(17);
-      expect(thermostat.energyUsage).toEqual('low-usage')
+      expect(thermostat.energyUsage()).toEqual('low-usage')
     })
 
     it('should state medium-usage', function(){
       thermostat.setTemp(24);
-      expect(thermostat.energyUsage).toEqual('medium-usage')
+      expect(thermostat.energyUsage()).toEqual('medium-usage')
     })
 
     it('should state high-usage', function(){
+      thermostat.setPowerSaving(false)
       thermostat.setTemp(26);
-      expect(thermostat.energyUsage).toEqual('high-usage')
+      expect(thermostat.energyUsage()).toEqual('high-usage')
     })
 
   })
