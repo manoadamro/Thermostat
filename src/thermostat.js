@@ -11,13 +11,20 @@ Thermostat.prototype.up = function (value = 1) {
 };
 
 Thermostat.prototype.down = function (value = 1) {
-  if (this.temp == MIN_TEMP) {
+  if ((this.temp - value) < MIN_TEMP) {
     throw "10 is the lowest!"
+    this.temp = MIN_TEMP;
   } else {
-  this.temp -= value
+    this.temp -= value
   }
 };
 
 Thermostat.prototype.setTemp = function(value){
-  this.temp = value
+  if (value < MIN_TEMP) {
+    throw "10 is the lowest!";
+    this.temp = MIN_TEMP;
+  }
+  else {
+    this.temp = value;
+  }
 };
