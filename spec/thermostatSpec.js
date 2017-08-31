@@ -21,7 +21,25 @@ describe('Themostat', function(){
       expect(thermostat.temp).toEqual(STARTING_TEMP + 5)
     })
 
-  })
+    it ('should not go above max when power saving is off', function() {
+      thermostat.setPowerSaving(false);
+      max = thermostat.maxTemp()
+      thermostat.setTemp(max)
+      expect(function(){
+        thermostat.up()
+      }).toThrow("Max temp is " + max + "!");
+    })
+
+    it ('should not go above max when power saving is on', function() {
+      thermostat.setPowerSaving(true);
+      max = thermostat.maxTemp()
+      thermostat.setTemp(max)
+      expect(function(){
+        thermostat.up()
+      }).toThrow("Max temp is " + max + "!");
+    })
+
+  });
 
   describe('turning the temp down', function(){
 
@@ -35,14 +53,14 @@ describe('Themostat', function(){
       thermostat.setTemp(MIN_TEMP)
       expect(function(){
         thermostat.down(1)
-      }).toThrow("10 is the lowest!");
+      }).toThrow(ERROR_MIN_TEMP);
     })
 
     it ('should not go below 10 degrees when reducing by more than 1', function(){
       thermostat.setTemp(MIN_TEMP + 5)
       expect(function(){
         thermostat.down(10)
-      }).toThrow("10 is the lowest!");
+      }).toThrow(ERROR_MIN_TEMP);
     })
 
   });
@@ -52,7 +70,23 @@ describe('Themostat', function(){
     it ('method \'setTemp\' can not set temp below ' + MIN_TEMP, function () {
       expect(function(){
         thermostat.setTemp(MIN_TEMP - 1)
-      }).toThrow("10 is the lowest!");
+      }).toThrow(ERROR_MIN_TEMP);
+    })
+
+    it ('method \'setTemp\' can not set temp above max when power saving is off', function () {
+      thermostat.setPowerSaving(false);
+      max = thermostat.maxTemp()
+      expect(function(){
+        thermostat.setTemp(max + 1)
+      }).toThrow("Max temp is " + max + "!");
+    })
+
+    it ('method \'setTemp\' can not set temp above max when power saving is on', function () {
+      thermostat.setPowerSaving(true);
+      max = thermostat.maxTemp()
+      expect(function(){
+        thermostat.setTemp(max + 1)
+      }).toThrow("Max temp is " + max + "!");
     })
   });
 
@@ -72,6 +106,5 @@ describe('Themostat', function(){
       expect(thermostat.maxTemp()).toEqual(32)
     })
 
-  })
-
+  });
 });
