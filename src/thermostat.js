@@ -45,7 +45,7 @@ Thermostat.prototype.setTemp = function(value){
 Thermostat.prototype.setPowerSaving = function(state){
   this.powerSaving = state
 }
-//
+
 Thermostat.prototype.maxTemp = function(){
   if (this.powerSaving === true) {
     return 25
